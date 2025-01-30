@@ -112,6 +112,11 @@ class NotesService {
       if (error instanceof NotFoundError) {
         throw error;
       }
+      try {
+        await this._collaborationService.verifyCollaborator(noteId, userId);
+      } catch {
+        throw error;
+      }
     }
   }
 }
